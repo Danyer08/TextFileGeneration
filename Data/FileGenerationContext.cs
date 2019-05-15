@@ -7,7 +7,7 @@ namespace TextFileGeneration.Data
     /// <summary>
     /// Represents the context to connect with database
     /// </summary>
-    public class DataContext : DbContext
+    public class FileGenerationContext : DbContext
     {
         private IConfiguration Configuration { get; set; }
         private readonly string configPath = "C:/Projects/TextFileGeneration";
@@ -16,7 +16,7 @@ namespace TextFileGeneration.Data
         /// Initialize a new instance of DataContext
         /// </summary>
         /// <param name="options">An instance of <see cref="DbContextOptions"/></param>
-        public DataContext(DbContextOptions options) : base(options) { }
+        public FileGenerationContext(DbContextOptions options) : base(options) { }
 
         internal DbSet<Institution> Institutions { get; set; }
 

@@ -2,10 +2,10 @@ C:\Projects\TextFileGeneration\bin\Debug\netcoreapp2.1\TextFileGeneration.deps.j
 C:\Projects\TextFileGeneration\bin\Debug\netcoreapp2.1\TextFileGeneration.runtimeconfig.json
 C:\Projects\TextFileGeneration\bin\Debug\netcoreapp2.1\TextFileGeneration.runtimeconfig.dev.json
 C:\Projects\TextFileGeneration\bin\Debug\netcoreapp2.1\TextFileGeneration.dll
+C:\Projects\TextFileGeneration\bin\Debug\netcoreapp2.1\TextFileGeneration.pdb
 C:\Projects\TextFileGeneration\obj\Debug\netcoreapp2.1\TextFileGeneration.csprojAssemblyReference.cache
 C:\Projects\TextFileGeneration\obj\Debug\netcoreapp2.1\TextFileGeneration.csproj.CoreCompileInputs.cache
 C:\Projects\TextFileGeneration\obj\Debug\netcoreapp2.1\TextFileGeneration.AssemblyInfoInputs.cache
 C:\Projects\TextFileGeneration\obj\Debug\netcoreapp2.1\TextFileGeneration.AssemblyInfo.cs
-C:\Projects\TextFileGeneration\bin\Debug\netcoreapp2.1\TextFileGeneration.pdb
 C:\Projects\TextFileGeneration\obj\Debug\netcoreapp2.1\TextFileGeneration.dll
 C:\Projects\TextFileGeneration\obj\Debug\netcoreapp2.1\TextFileGeneration.pdb

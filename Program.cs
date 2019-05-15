@@ -9,9 +9,9 @@ namespace TextFileGeneration
 {
     class Program
     {
-        public static DataContext _context;
+        public static FileGenerationContext _context;
 
-        public Program(DataContext context)
+        public Program(FileGenerationContext context)
         {
             _context = context;
         }
