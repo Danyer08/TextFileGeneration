@@ -18,6 +18,10 @@ namespace TextFileGeneration.Data
         /// <param name="options">An instance of <see cref="DbContextOptions"/></param>
         public FileGenerationContext(DbContextOptions options) : base(options) { }
 
+        public FileGenerationContext()
+        {
+        }
+
         internal DbSet<Institution> Institutions { get; set; }
 
         internal DbSet<Employee> Employees { get; set; }
@@ -30,7 +34,6 @@ namespace TextFileGeneration.Data
         private string GetConnectionString()
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(configPath)
                 .AddJsonFile("appsettings.json");
 
             Configuration = builder.Build();

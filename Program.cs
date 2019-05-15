@@ -18,7 +18,8 @@ namespace TextFileGeneration
 
         static void Main(string[] args)
         {
-            string filePath = "C:/Files/EmployersList.txt";
+            Console.Write("Escribe la ruta final donde quiere que se imprima el archivo: ");
+            string filePath = Console.ReadLine();
 
             FileGeneration(filePath);
         }
@@ -59,7 +60,13 @@ namespace TextFileGeneration
                 }
             };
 
-            using (StreamWriter file = File.AppendText(path))
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            
+            using (StreamWriter file = File.CreateText($@"{path}\archivo.txt"))
             {
                 file.WriteLine("#Encabezado");
                 file.WriteLine($"{institution.AccountNumber},{institution.PaymentDate},{institution.RNC}," +
