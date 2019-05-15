@@ -8,8 +8,6 @@
 
         public double Salary { get; set; }
 
-        public int MyProperty { get; set; }
-
         public string EmployeeCode { get; set; }
 
         public int InstitutionId { get; set; }
