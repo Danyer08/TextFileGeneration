@@ -9,25 +9,7 @@ namespace TextFileReader
     {
         static void Main(string[] args)
         {
-            Console.Write("Seleccione la de donde se procederan a leer los archivos: ");
-            string route = Console.ReadLine();
-
-            using (var fs = new FileStream(route, FileMode.Open, FileAccess.Read))
-            using (StreamReader reader = new StreamReader(fs))
-            {
-                var tf = new Transformator();
-
-                Archivo archivo =  tf.Transform(reader);
-                archivo.FileName = fs.Name;
-                var context = new FileReaderContext();
-
-                context.Archivos.Add(archivo);
-                context.SaveChanges();
-
-                PrintInvoice(archivo);
-            }
-
-            Console.ReadLine();
+                    RunFileWatcher();
         }
 
         private static void PrintInvoice(Archivo archivo)
@@ -49,6 +31,54 @@ namespace TextFileReader
 
 
             Console.WriteLine("".PadRight(40, '='));
+        }
+
+        private static void  RunFileWatcher()
+        {
+            using (FileSystemWatcher watcher = new FileSystemWatcher())
+            {
+                watcher.Path = @"D:\Dummy-files\";
+                // Watch for changes in LastAccess and LastWrite times, and
+                // the renaming of files or directories.
+                watcher.NotifyFilter = NotifyFilters.LastAccess
+                                       | NotifyFilters.LastWrite
+                                       | NotifyFilters.FileName
+                                       | NotifyFilters.DirectoryName;
+                // Only watch text files.
+                watcher.Filter = "*.txt";
+
+                // Add event handlers.
+                watcher.Created += OnChanged;
+
+                // Begin watching.
+                watcher.EnableRaisingEvents = true;
+
+                // Wait for the user to quit the program.
+                Console.WriteLine("Presione 'q' para salir");
+                while (Console.Read() != 'q') ;
+            }
+        }
+
+        private static void OnChanged(object source, FileSystemEventArgs e)
+        {
+            // Specify what is done when a file is changed, created, or deleted.
+            Console.WriteLine($"File: {e.FullPath} {e.ChangeType}");
+
+            using (var fs = new FileStream(e.FullPath, FileMode.Open, FileAccess.Read))
+            using (StreamReader reader = new StreamReader(fs))
+            {
+                var tf = new Transformator();
+
+                Archivo archivo = tf.Transform(reader);
+                archivo.FileName = fs.Name;
+                var context = new FileReaderContext();
+
+                context.Archivos.Add(archivo);
+                context.SaveChanges();
+
+                PrintInvoice(archivo);
+            }
+
         }
     }
 }

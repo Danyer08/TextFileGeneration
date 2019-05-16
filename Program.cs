@@ -30,7 +30,7 @@ namespace TextFileGeneration
                 Directory.CreateDirectory(path);
             }
             
-            using (StreamWriter file = File.CreateText($@"{path}\archivo.txt"))
+            using (StreamWriter file = File.CreateText($@"{path}\arhivo.txt"))
             {
                 using (var context = new FileGenerationContext())
                 {
@@ -48,7 +48,15 @@ namespace TextFileGeneration
                     file.WriteLine("#Sumario");
                     file.WriteLine($"{foudInstitution.Employees.Count()}");
                 }
+
             }
+
+            File.Move($@"{path}\arhivo.txt", $@"D:\Dummy-files\{Guid.NewGuid()}.txt");
+            File.Delete($@"{path}\arhivo.txt");
+
+            Console.WriteLine("El archivo fue generado con exito");
+
+            Console.ReadLine();
         }
     }
 }
