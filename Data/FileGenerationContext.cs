@@ -26,6 +26,10 @@ namespace TextFileGeneration.Data
 
         internal DbSet<Employee> Employees { get; set; }
 
+        internal DbSet<HardwareStore> HardwareStores { get; set; }
+
+        internal DbSet<HardwareStoreEmployee> HardwareStoreEmployees { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(GetConnectionString());

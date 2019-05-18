@@ -15,21 +15,21 @@ namespace TextFileGeneration
             Console.Write("Escribe la ruta final donde quiere que se imprima el archivo: ");
             string filePath = Console.ReadLine();
 
-            FileGeneration(filePath);
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+
+            TssFileGeneration(filePath);
         }
 
-        public static void FileGeneration(string path)
+        public static void ApapFileGeneration(string path)
         {
-            if (File.Exists(path))    
-            {    
-                File.Delete(path);    
-            }
-
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            
             using (StreamWriter file = File.CreateText($@"{path}\arhivo.txt"))
             {
                 using (var context = new FileGenerationContext())
@@ -53,6 +53,37 @@ namespace TextFileGeneration
 
             File.Move($@"{path}\arhivo.txt", $@"D:\Dummy-files\{Guid.NewGuid()}.txt");
             File.Delete($@"{path}\arhivo.txt");
+
+            Console.WriteLine("El archivo fue generado con exito");
+
+            Console.ReadLine();
+        }
+
+        public static void TssFileGeneration(string path)
+        {
+            using (StreamWriter file = File.CreateText($@"{path}\archivoTss.txt"))
+            {
+                using (var context = new FileGenerationContext())
+                {
+                    HardwareStore foundStore = context.HardwareStores.Include(store => store.Employees)
+                        .FirstOrDefault(store => store.Id == 1);
+
+                    file.WriteLine("#Encabezado");
+                    file.WriteLine($"{foundStore.FileType},{foundStore.Period},{foundStore.TransmitionDate}," +
+                        $"{foundStore.RNC},{foundStore.TotalTransactions}");
+                    file.WriteLine("#Detalle");
+                    foreach (HardwareStoreEmployee employee in foundStore.Employees)
+                    {
+                        file.WriteLine($"{employee.Id},{employee.Salary},{employee.VoluntaryContribution},{employee.OthersRemunerations},{employee.InfotepSalay},{employee.IsrSalary}");
+                    }
+                    file.WriteLine("#Sumario");
+                    file.WriteLine($"{foundStore.Employees.Count()}");
+                }
+
+            }
+
+            File.Move($@"{path}\arhivo.txt", $@"D:\Dummy-files\{Guid.NewGuid()}.txt");
+            File.Delete($@"{path}\arhivoTss.txt");
 
             Console.WriteLine("El archivo fue generado con exito");
 

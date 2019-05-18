@@ -6,6 +6,7 @@ namespace TextFileGeneration.Entities
     public class Institution
     {
         public int Id { get; set; }
+
         public int AccountNumber { get; set; }
 
         public DateTime PaymentDate { get; set; }
