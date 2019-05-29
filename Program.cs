@@ -38,15 +38,16 @@ namespace TextFileGeneration
                         .FirstOrDefault(institution => institution.Id == 1);
 
                     file.WriteLine("#Encabezado");
-                    file.WriteLine($"{foudInstitution.AccountNumber},{foudInstitution.PaymentDate},{foudInstitution.TransmitionDate}," +
-                        $"{foudInstitution.RNC},{foudInstitution.TotalAmount}");
+                    file.WriteLine($"M,{foudInstitution.PaymentDate:MMyyyy},{foudInstitution.TransmitionDate:ddMMyyyy}," +
+                        $"{foudInstitution.RNC},{foudInstitution.Employees.Count}");
                     file.WriteLine("#Detalle");
                     foreach (Employee employee in foudInstitution.Employees)
                     {
-                        file.WriteLine($"{employee.Id},{employee.AccountNumber},{employee.Salary},{employee.EmployeeCode}");
+                        file.WriteLine($"{employee.Identification},{employee.CotizableSalary},{employee.VoluntaryAport},{employee.OtherRemuneration}," +
+                                       $"{employee.OtherRemuneration},{employee.InfotepSalary},{employee.ISRSalary}");
                     }
                     file.WriteLine("#Sumario");
-                    file.WriteLine($"{foudInstitution.Employees.Count()}");
+                    file.WriteLine($"{foudInstitution.Employees.Count}");
                 }
 
             }

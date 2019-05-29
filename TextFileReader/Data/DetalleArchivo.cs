@@ -14,5 +14,15 @@
         public Archivo Archivo { get; set; }
 
         public int ArchivoId { get; set; }
+
+        public decimal CotizableSalary { get; set; }
+
+        public decimal VoluntaryAport { get; set; }
+
+        public decimal OtherRemuneration { get; set; }
+
+        public decimal InfotepSalary { get; set; }
+
+        public decimal ISRSalary { get; set; }
     }
 }
