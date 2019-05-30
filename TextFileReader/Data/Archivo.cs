@@ -7,13 +7,15 @@ namespace TextFileReader.Data
     {
         public int Id { get; set; }
 
+        public string Period { get; set; }
+        public char FileType { get; set; }
         public DateTime TransmissionDate { get; set; }
 
         public int EmployeeQuantity { get; set; }
 
         public string FileName { get; set; }
 
-        public DateTime PaymentDate { get; set; }
+        public DateTime? PaymentDate { get; set; }
 
         public string AccountNumber { get; set; }
 

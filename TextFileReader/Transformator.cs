@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using TextFileReader.Data;
@@ -76,9 +77,11 @@ namespace TextFileReader
             DetalleArchivo detalleArchivo = new DetalleArchivo();
 
             detalleArchivo.Identification = values[0];
-            detalleArchivo.AccountNumber = values[1];
-            detalleArchivo.Salary = decimal.Parse(values[2]);
-            detalleArchivo.EmployeeCode = values[3];
+            detalleArchivo.CotizableSalary = decimal.Parse(values[1]);
+            detalleArchivo.VoluntaryAport = decimal.Parse(values[2]);
+            detalleArchivo.OtherRemuneration =decimal.Parse( values[3]);
+            detalleArchivo.InfotepSalary = decimal.Parse(values[4]);
+            detalleArchivo.ISRSalary = decimal.Parse(values[5]);
 
             _archivo.FileDetail.Add(detalleArchivo);
         }
@@ -86,11 +89,11 @@ namespace TextFileReader
         private void AccumulateHeaderLine(string trimmedLine)
         {
             var values = trimmedLine.Split(',').Select(column => column.Trim()).ToList();
-            _archivo.AccountNumber = values[0];
-            _archivo.PaymentDate = Convert.ToDateTime(values[1]);
-            _archivo.TransmissionDate = Convert.ToDateTime(values[2]);
+            _archivo.FileType =char.Parse( values[0]);
+            _archivo.Period =values[1];
+            _archivo.TransmissionDate = DateTime.ParseExact(values[2],"ddMMyyyy", CultureInfo.InvariantCulture);
             _archivo.RNC = values[3];
-            _archivo.Roster = decimal.Parse(values[4]);
+            _archivo.EmployeeQuantity = int.Parse(values[4]);
 
         }
 
