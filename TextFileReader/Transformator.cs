@@ -2,6 +2,8 @@
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Microsoft.EntityFrameworkCore.Query.Expressions;
+using Newtonsoft.Json;
 using TextFileReader.Data;
 
 namespace TextFileReader
@@ -120,5 +122,18 @@ namespace TextFileReader
 
         private  bool IsCommentOrBlockIdentifier(string trimmedLine) => trimmedLine.StartsWith("#");
 
+
+        public InterExchange TransformExchange(string rawJson)
+        {
+            var interExchange = JsonConvert.DeserializeObject<InterExchange>(rawJson);
+
+            interExchange.Id = 0;
+            interExchange.Students = interExchange.Students.Select(student =>
+            {
+                student.Id = 0;
+                return student;
+            }).ToHashSet();
+            return interExchange;
+        }
     }
 }

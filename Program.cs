@@ -114,6 +114,11 @@ namespace TextFileGeneration
                 File.WriteAllText($@"{path}\InterexchangeStudents.json", interExchangeJsonFile);
 
                 Console.WriteLine(interExchangeJsonFile);
+
+                File.Move($@"{path}\InterexchangeStudents.json", $@"D:\Dummy-files\{Guid.NewGuid()}.json");
+                File.Delete($@"{path}\InterexchangeStudents.json");
+
+                Console.WriteLine("El archivo fue generado con exito");
                 Console.ReadLine();
             }
         }

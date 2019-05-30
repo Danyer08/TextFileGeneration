@@ -7,6 +7,11 @@ namespace TextFileReader.Data
     {
         public DbSet<Archivo> Archivos { get; set; }
 
+
+        internal DbSet<InterExchange> InterExchanges { get; set; }
+
+        internal DbSet<Student> Students { get; set; }
+
         public DbSet<DetalleArchivo> DetalleArchivos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -44,15 +44,47 @@ namespace TextFileReader
                                        | NotifyFilters.FileName
                                        | NotifyFilters.DirectoryName;
 
-                watcher.Filter = "*.txt";
+                watcher.Filter = "*.json";
 
-                watcher.Created += OnChanged;
+                watcher.Created += OnChangedJson;
 
                 watcher.EnableRaisingEvents = true;
 
 
                 Console.WriteLine("Presione 'q' para salir");
                 while (Console.Read() != 'q') ;
+            }
+        }
+
+        private static void OnChangedJson(object source, FileSystemEventArgs e)
+        {
+            Console.WriteLine($"File: {e.FullPath} {e.ChangeType}");
+            string rawJson = File.ReadAllText(e.FullPath);
+            var tf = new Transformator();
+           InterExchange   interExchange =  tf.TransformExchange(rawJson);
+            var context = new FileReaderContext();
+
+            context.InterExchanges.Add(interExchange);
+            context.SaveChanges();
+
+            PrintInterExchange(interExchange);
+        }
+
+        private static void PrintInterExchange(InterExchange interExchange)
+        {
+            Console.WriteLine("".PadRight(70, '='));
+            Console.WriteLine($"Periodo: {interExchange.Period}");
+            Console.WriteLine($"Cantidad de creditos: {interExchange.CreditsQuantity}");
+            Console.WriteLine($"Fecha de transmision: {interExchange.TransmissionDate:F}");
+            Console.WriteLine("");
+            Console.WriteLine("Estudiantes:");
+
+            Console.WriteLine("".PadRight(70, '='));
+            Console.WriteLine($"Cedula \tMatricula\t Monto\t Cantidad de creditos ");
+            Console.WriteLine("".PadRight(70, '='));
+            foreach (var detail in interExchange.Students)
+            {
+                Console.WriteLine($"{detail.Identification}\t{detail.RegistrationNumber}\t {detail.Amount:C0}\t {detail.CreditsQuantity:C0}");
             }
         }
 
