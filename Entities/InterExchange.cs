@@ -6,6 +6,8 @@ namespace TextFileGeneration.Entities
 {
     public class InterExchange
     {
+        public int Id { get; set; }
+
         public int CreditsQuantity { get; set; }
 
         public int StudentsQuantity { get; set; }

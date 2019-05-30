@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TextFileGeneration.Entities
+﻿namespace TextFileGeneration.Entities
 {
     public class Student
     {
+        public int Id { get; set; }
+
         public string Identification { get; set; }
 
         public string RegistrationNumber { get; set; }

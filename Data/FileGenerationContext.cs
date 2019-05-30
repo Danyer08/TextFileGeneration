@@ -10,7 +10,6 @@ namespace TextFileGeneration.Data
     public class FileGenerationContext : DbContext
     {
         private IConfiguration Configuration { get; set; }
-        private readonly string configPath = "C:/Projects/TextFileGeneration";
 
         /// <summary>
         /// Initialize a new instance of DataContext
@@ -29,6 +28,10 @@ namespace TextFileGeneration.Data
         internal DbSet<HardwareStore> HardwareStores { get; set; }
 
         internal DbSet<HardwareStoreEmployee> HardwareStoreEmployees { get; set; }
+
+        internal DbSet<InterExchange> InterExchanges { get; set; }
+
+        internal DbSet<Student> Students { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

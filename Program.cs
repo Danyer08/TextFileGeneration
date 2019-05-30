@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TextFileGeneration.Data;
@@ -25,7 +25,7 @@ namespace TextFileGeneration
                 Directory.CreateDirectory(filePath);
             }
 
-            TssFileGeneration(filePath);
+            ApecJsonGeneration(filePath);
         }
 
         public static void ApapFileGeneration(string path)
@@ -89,6 +89,33 @@ namespace TextFileGeneration
             Console.WriteLine("El archivo fue generado con exito");
 
             Console.ReadLine();
+        }
+
+        public static void ApecJsonGeneration(string path)
+        {
+            using (var context = new FileGenerationContext())
+            {
+                InterExchange interExchange = context.InterExchanges.Include(exchange => exchange.Students)
+                    .FirstOrDefault(institution => institution.Id == 1);
+
+
+                interExchange.StudentsQuantity = interExchange.Students.Count;
+                interExchange.Students.ToList().ForEach(student =>
+                {
+                    interExchange.TotalAmount += student.Amount;
+                });
+                interExchange.Students.ToList().ForEach(student =>
+                {
+                    interExchange.CreditsQuantity += student.CreditsQuantity;
+                });
+
+                string interExchangeJsonFile = JsonConvert.SerializeObject(interExchange);
+
+                File.WriteAllText($@"{path}\InterexchangeStudents.json", interExchangeJsonFile);
+
+                Console.WriteLine(interExchangeJsonFile);
+                Console.ReadLine();
+            }
         }
     }
 }
